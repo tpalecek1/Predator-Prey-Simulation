@@ -41,18 +41,18 @@ void Board::displayBoard()
 				std::cout << " ";
 			else if (board[i][j]->getType() == ANT)
 				std::cout << "O";
-			else
-				std::cout << "X";
+			else std::cout << "X";
 		}
 		std::cout << std::endl;
 	}
 }
 //Used to add Critter Pointers to 100 Ant
-//and Doodlebug objects randomly on the board
+//and 5 Doodlebug objects randomly on the board
 void Board::addCritters()
 {
 	//The Ant creation/addition portion
 	int numAnt = 0;
+	int numDoodlebug = 0;
 	while (numAnt < 100)
 	{
 		int x = rand() % 20;  //get random x
@@ -66,16 +66,47 @@ void Board::addCritters()
 			//assign that board spot the pointer
 			board[x][y] = flik;
 		}
+	}
+
+	while (numDoodlebug < 5)
+	{
+		int x = rand() % 20;  //get random x
+		int y = rand() % 20;  //get random y
+
+		if (board[x][y] == NULL) //if there is nothing there
+		{ //increase the number of ant counter
+			numDoodlebug++;
+			//create a critter pointer to an ant object named flik
+			Critter *flik = new Doodlebug(x, y);
+			//assign that board spot the pointer
+			board[x][y] = flik;
+		}
 }
 
 void Board::moveCritters()
 {
 	//Iterate through grid performing move function on all Critters with moved = false
+	//Move the Doodlebugs first.
 	for (int i = 0; i < 20; i++)
 	{
 		for (int j = 0; j < 20; j++)
 		{
-			if(board[i][j] != NULL)
+			if(board[i][j] != NULL && board[i][j]->getType() == DOODLEBUG)
+			{
+				if (board[i][j]->getMoved() == false)
+				{
+					board[i][j]->move();
+					board[i][j]->setMoved(true);
+				}
+			}
+		}
+	}
+	//Move the Ants last.	
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if(board[i][j] != NULL && board[i][j] == ANT)
 			{
 				if (board[i][j]->getMoved() == false)
 				{
