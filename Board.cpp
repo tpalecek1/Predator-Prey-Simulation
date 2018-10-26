@@ -77,6 +77,16 @@ void Board::breedCritters()
 void Board::clearMoved()
 {
 	//set moved to false on all Critters
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if (board[i][j] != NULL)
+			{
+				board[i][j]->setMoved(false);
+			}
+		}
+	}
 }
 
 void Board::removeCritters()
