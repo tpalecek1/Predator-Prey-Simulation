@@ -1,7 +1,11 @@
 #include "Board.hpp"
+#include "Critter.hpp"
+#include "Ant.hpp"
+#include "Doodlebug.hpp"
+#include <cstdlib>
+#include <iostream>
 
-
-//Used to initializing board to 20x20 of NULL
+//Used to initialize board to 20x20 of NULL
 Board::Board()
 {
 	for (int i = 0; i < 20; i++)
@@ -67,6 +71,20 @@ void Board::addCritters()
 void Board::moveCritters()
 {
 	//Iterate through grid performing move function on all Critters with moved = false
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if(board[i][j] != NULL)
+			{
+				if (board[i][j]->getMoved() == false)
+				{
+					board[i][j]->move();
+					board[i][j]->setMoved(true);
+				}
+			}
+		}
+	}
 }
 
 void Board::breedCritters()
@@ -77,6 +95,16 @@ void Board::breedCritters()
 void Board::clearMoved()
 {
 	//set moved to false on all Critters
+	for (int i = 0; i < 20; i++)
+	{
+		for (int j = 0; j < 20; j++)
+		{
+			if (board[i][j] != NULL)
+			{
+				board[i][j]->setMoved(false);
+			}
+		}
+	}
 }
 
 void Board::removeCritters()

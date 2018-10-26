@@ -6,6 +6,8 @@
 class Doodlebug :
 	public Critter
 {
+private:
+	int hunger;
 public:
 	Doodlebug();
 	Doodlebuyg(int x, int y);
@@ -13,6 +15,8 @@ public:
 
 	void move();
 	void breed();
+	void setHunger(int starve);
+	int getHunger();
 };
 
 #endif
