@@ -17,7 +17,7 @@ void Critter::setXCoord(int x)
 	xCoord = x;
 }
 
-int Critter::getXCoord(int)
+int Critter::getXCoord()
 {
 	return xCoord;
 }
@@ -27,9 +27,9 @@ void Critter::setYCoord(int y)
 	yCoord = y;
 }
 
-int Critter::getYCoord(int)
+int Critter::getYCoord()
 {
-	return yCooord;
+	return yCoord;
 }
 
 void Critter::setSteps(int s)
@@ -67,7 +67,7 @@ Type Critter::getType()
 	return type;
 }
 
-void Critter::move()
+void Critter::move(Critter ****board)
 {
 	//
 }
