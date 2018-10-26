@@ -28,7 +28,7 @@ void Doodlebug::move()
 		move to empty cell
 		increase Hunger by 1 
 	else If no ants AND no empty cell(all adjacent cells are Doodlebugs) 
-		don’t move
+		donâ€™t move
 		increase Hunger by 1. 
 		Increase Steps by 1.
 	*/
@@ -43,4 +43,14 @@ void Doodlebug::breed()
 	If no empty adjacent cell, 
 		do nothing.
 	*/
+}
+
+int Doodlebug::getHunger()
+{
+	return hunger;
+}
+
+void Doodlebug::setHunger(int starve)
+{
+	hunger = starve;
 }
