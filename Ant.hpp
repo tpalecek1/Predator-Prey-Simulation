@@ -2,16 +2,16 @@
 #define ANT_HPP
 
 #include "Critter.hpp"
+#include "Board.hpp"
 
-class Ant :
-	public Critter
+class Ant :	public Critter
 {
 public:
 	Ant();
 	Ant(int x, int y);
 	~Ant();
 
-	void move();
+	virtual void move(Critter ****board);
 	void breed();
 };
 

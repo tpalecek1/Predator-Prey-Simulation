@@ -1,4 +1,6 @@
 #include "Doodlebug.hpp"
+#include <cstdlib>
+#include <iostream>
 
 
 
@@ -6,11 +8,14 @@ Doodlebug::Doodlebug()
 {
 }
 
-Doodlebug::Doodlebuyg(int x, int y)
+Doodlebug::Doodlebug(int x, int y)
 {
 	xCoord = x;
 	yCoord = y;
 	type = DOODLEBUG;
+	setHunger(0);
+	setSteps(0);
+	setMoved(false);
 }
 
 
@@ -18,21 +23,73 @@ Doodlebug::~Doodlebug()
 {
 }
 
-void Doodlebug::move()
+void Doodlebug::move(Critter ****board)
 {
-	/*If there is an ant adjacent, 
-		move to that cell, 
-		eat(set alive to 0) ant
-		set Hunger to 0.  
-	else If no ants are adjacent, 
-		move to empty cell
-		increase Hunger by 1 
-	else If no ants AND no empty cell(all adjacent cells are Doodlebugs) 
-		don’t move
-		increase Hunger by 1. 
-		Increase Steps by 1.
+	/*
+	Increase step count by 1
+	randomly move up, down, left, or right. If cell is occupied or off the grid, don’t move.  
 	*/
+	//There needs to be another function checking for an Ant to eat. Else it continues down.
+	int counter = 0;
+	int direction = rand(); 
+	bool moved = false;
+
+	while(counter < 4 && !moved)
+	{
+		direction++;
+		direction  = direction % 4;
+		switch(direction)
+		{
+			case 0:
+				if(getXCoord() - 1 > -1 && (*board)[getXCoord() - 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() - 1][getYCoord()] = (*board)[getXCoord()][getYCoord()];
+					(*board)[getXCoord()][getYCoord()] = NULL;
+					setXCoord(getXCoord() - 1);
+					moved = true;
+				}
+				counter++;
+				break;
+			case 1:
+				if(getYCoord() + 1 < 20  && (*board)[getXCoord()][getYCoord() +1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() +1] = (*board)[getXCoord()][getYCoord()];
+					(*board)[getXCoord()][getYCoord()] = NULL;
+					setYCoord(getYCoord() + 1);
+					moved = true;
+				}
+				counter++;
+				break;
+			case 2:
+				if(getXCoord() + 1 < 20 && (*board)[getXCoord() + 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() + 1][getYCoord()] = (*board)[getXCoord()][getYCoord()];
+					(*board)[getXCoord()][getYCoord()] = NULL;
+					setXCoord(getXCoord() + 1);
+					moved = true;
+				}
+				counter++;
+				break;
+			case 3:
+				if(getYCoord() - 1 > -1  && (*board)[getXCoord()][getYCoord() -1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() -1] = (*board)[getXCoord()][getYCoord()];
+					(*board)[getXCoord()][getYCoord()] = NULL;
+					setYCoord(getYCoord() - 1);
+					moved = true;
+				}
+				counter++;
+				break;
+
+
+		}
+	}
+	setMoved(true);
+	setSteps(getSteps() + 1);
+	setHunger(getHunger() +1);
+	std::cout << "The doodlebug is " << getHunger() << " that hungry." << std::endl;
 }
+
 
 void Doodlebug::breed()
 {

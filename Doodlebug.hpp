@@ -2,6 +2,7 @@
 #define DOODLEBUG_HPP
 
 #include "Critter.hpp"
+#include "Board.hpp"
 
 class Doodlebug :
 	public Critter
@@ -10,10 +11,10 @@ private:
 	int hunger;
 public:
 	Doodlebug();
-	Doodlebuyg(int x, int y);
+	Doodlebug(int x, int y);
 	~Doodlebug();
 
-	void move();
+	virtual void move(Critter****);
 	void breed();
 	void setHunger(int starve);
 	int getHunger();
