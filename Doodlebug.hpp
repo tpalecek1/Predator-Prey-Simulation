@@ -18,7 +18,6 @@ public:
 	void breed(Critter****);
 	void setHunger(int starve);
 	int getHunger();
-	void eat();
 };
 
 #endif
