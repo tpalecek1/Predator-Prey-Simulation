@@ -33,8 +33,9 @@ void Doodlebug::move(Critter ****board)
 	int counter = 0;
 	int direction = rand(); 
 	bool moved = false;
+	bool ateAnt = false;
 
-	while(counter < 4 && !moved)
+	while(counter < 4 && !moved && !ateAnt)
 	{
 		direction++;
 		direction  = direction % 4;
@@ -47,6 +48,15 @@ void Doodlebug::move(Critter ****board)
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setXCoord(getXCoord() - 1);
 					moved = true;
+					
+					if((getXCoord() - 1 > -1) && (*board)[getXCoord() - 1][getYCoord()]->getType() == ANT)
+					{
+						delete(*board)[getXCoord() - 1][getYCoord()];
+						(*board)[getXCoord() -1][getYCoord()]->getType() = DOODLEBUG;
+						(*board)[getXCoord()][getYCoord()] = NULL;
+						getXCoord()--;
+						ateAnt = true;
+					}
 				}
 				counter++;
 				break;
@@ -57,6 +67,14 @@ void Doodlebug::move(Critter ****board)
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setYCoord(getYCoord() + 1);
 					moved = true;
+					if((getYCoord() + 1 < 20) && (*board)[getXCoord()][getYCoord() + 1]->getType() == ANT)
+					{
+						delete(*board)[getXCoord()][getYCoord() + 1];
+						(*board)[getXCoord()][getYCoord() + 1]->getType() = DOODLEBUG;
+						(*board)[getXCoord()][getYCoord()] = NULL;
+						getYCoord()++;
+						ateAnt = true;
+					}
 				}
 				counter++;
 				break;
@@ -67,6 +85,14 @@ void Doodlebug::move(Critter ****board)
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setXCoord(getXCoord() + 1);
 					moved = true;
+					if ((getXCoord() + 1 < 20) && (*board)[getXCoord() + 1][getYCoord()]->getType() == ANT)
+					{
+						delete(*board)[getXCoord() + 1][getYCoord()];
+						(*board)[getXCoord() + 1][getYCoord()]->getType() = DOODLEBUG;
+						(*board)[getXCoord()][getYCoord()] = NULL;
+						getXCoord()++;
+						ateAnt = true;
+					}
 				}
 				counter++;
 				break;
@@ -77,6 +103,14 @@ void Doodlebug::move(Critter ****board)
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setYCoord(getYCoord() - 1);
 					moved = true;
+					if((getYCoord() - 1 > -1) && (*board)[getXCoord()][getYCoord() - 1]->getType() == ANT)
+					{
+						delete(*board)[getXCoord()][getYCoord() - 1];
+						(*board)[getXCoord()][getYCoord() - 1]->getType() == DOODLEBUG;
+						(*board)[getXCoord()][getYCoord()] = NULL;
+						getYCoord()--;
+						ateAnt = true;
+					}
 				}
 				counter++;
 				break;
