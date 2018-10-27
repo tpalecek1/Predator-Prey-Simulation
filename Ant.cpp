@@ -22,67 +22,60 @@ Ant::~Ant()
 {
 }
 
-void Ant::move(Critter ****board, int boardSize)
+void Ant::move(Critter ****board)
 {
 	/*
 	Increase step count by 1
 	randomly move up, down, left, or right. If cell is occupied or off the grid, don’t move.  
 	*/
+	int counter = 0;
 	int direction = rand(); 
-	bool critterMoved = false;
-	bool up = getXCoord() - 1 > -1 
-		&& (*board)[getXCoord() - 1][getYCoord()] == NULL;
-	bool down = getXCoord() + 1 < boardSize 
-		&& (*board)[getXCoord() + 1][getYCoord()] == NULL; 
-	bool left = getYCoord() - 1 > -1  
-		&& (*board)[getXCoord()][getYCoord() -1] == NULL; 
-	bool right = getYCoord() + 1 < boardSize 
-		&& (*board)[getXCoord()][getYCoord() +1] == NULL;
-	/*
-	The Ant will move randomly to an available cell if possible. The pointers are swapped, the old 
-	pointer points to NULL, it's X or Y coordinate is changed and critterMoved is changed to break 
-	from the loop.
-	*/
-	while((up || down || left || right) && !critterMoved)
+	bool moved = false;
+	while(counter < 4 && !moved)
 	{
-		direction  = rand() % 4;
+		direction++;
+		direction  = direction % 4;
 		switch(direction)
 		{
 			case 0:
-				if(up)
+				if(getXCoord() - 1 > -1 && (*board)[getXCoord() - 1][getYCoord()] == NULL)
 				{
 					(*board)[getXCoord() - 1][getYCoord()] = (*board)[getXCoord()][getYCoord()];
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setXCoord(getXCoord() - 1);
-					critterMoved = true;
+					moved = true;
 				}
+				counter++;
 				break;
 			case 1:
-				if(right)
+				if(getYCoord() + 1 < 20  && (*board)[getXCoord()][getYCoord() +1] == NULL)
 				{
 					(*board)[getXCoord()][getYCoord() +1] = (*board)[getXCoord()][getYCoord()];
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setYCoord(getYCoord() + 1);
-					critterMoved = true;
+					moved = true;
 				}
+				counter++;
 				break;
 			case 2:
-				if(down)
+				if(getXCoord() + 1 < 20 && (*board)[getXCoord() + 1][getYCoord()] == NULL)
 				{
 					(*board)[getXCoord() + 1][getYCoord()] = (*board)[getXCoord()][getYCoord()];
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setXCoord(getXCoord() + 1);
-					critterMoved = true;
+					moved = true;
 				}
+				counter++;
 				break;
 			case 3:
-				if(left)
+				if(getYCoord() - 1 > -1  && (*board)[getXCoord()][getYCoord() -1] == NULL)
 				{
 					(*board)[getXCoord()][getYCoord() -1] = (*board)[getXCoord()][getYCoord()];
 					(*board)[getXCoord()][getYCoord()] = NULL;
 					setYCoord(getYCoord() - 1);
-					critterMoved = true;
+					moved = true;
 				}
+				counter++;
 				break;
 
 
@@ -93,54 +86,51 @@ void Ant::move(Critter ****board, int boardSize)
 }
 
 
-void Ant::breed(Critter**** board, int boardSize)
+void Ant::breed(Critter**** board)
 {
-	/*
-	 if Steps >= 3 
-		create new ant in an empty cell adjacent to ant, 
-		set Steps to 0. 
-	If no empty adjacent cell, do nothing.
-	*/
-	int direction;
+	if (getSteps() >= 3) {
 
-	bool up = getXCoord() - 1 > -1 
-		&& (*board)[getXCoord() -1][getYCoord()] == NULL;
-	bool down = getXCoord() + 1 < boardSize 
-		&& (*board)[getXCoord() + 1][getYCoord()] == NULL;
-	bool left = getYCoord() + 1 < boardSize 
-		&& (*board)[getXCoord()][getYCoord() + 1] == NULL;
-	bool right = getYCoord() - 1 > -1 
-		&& (*board)[getXCoord()][getYCoord() - 1] == NULL;
-
-	bool notBred = true;
-
-	while((up || down || left || right) && notBred){
-		direction = rand() % 4;
-		switch(direction){
+		int counter = 0;
+		int direction = rand();
+		bool moved = false;
+		direction++;
+		while (counter < 4 && !moved) {
+			direction = direction % 4;
+			switch (direction)
+			{
 			case 0:
-				if(up){
-					(*board)[getXCoord() -1][getYCoord()] = new Ant(getXCoord() - 1, getYCoord());
-					notBred = false;
+				if (getXCoord() - 1 > -1 && (*board)[getXCoord() - 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() - 1][getYCoord()] = new Ant(getXCoord() - 1, getYCoord());
+					setSteps(0);
 				}
+				counter++;
 				break;
-			case 1:	
-				if(down){
-					(*board)[getXCoord() + 1][getYCoord()] 	= new Ant(getXCoord() + 1, getYCoord());
-					notBred = false;
+			case 1:
+				if (getYCoord() + 1 < 20 && (*board)[getXCoord()][getYCoord() + 1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() + 1] = new Ant(getXCoord(), getYCoord() + 1);
+					setSteps(0);
 				}
+				counter++;
 				break;
 			case 2:
-				if(left){
-					(*board)[getXCoord()][getYCoord() + 1] 	= new Ant(getXCoord(), getYCoord() + 1);
-					notBred = false;
+				if (getXCoord() + 1 < 20 && (*board)[getXCoord() + 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() + 1][getYCoord()] = new Ant(getXCoord() + 1, getYCoord());
+					setSteps(0);
 				}
+				counter++;
 				break;
 			case 3:
-				if(right){
-					(*board)[getXCoord()][getYCoord() - 1] 	= new Ant(getXCoord(), getYCoord() - 1);
-					notBred = false;
+				if (getYCoord() - 1 > -1 && (*board)[getXCoord()][getYCoord() - 1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() - 1] = new Ant(getXCoord(), getYCoord() - 1);
+					setSteps(0);
 				}
-				break;	
+				counter++;
+				break;
+			}
 		}
 	}
 }

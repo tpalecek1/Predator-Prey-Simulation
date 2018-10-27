@@ -4,17 +4,15 @@
 #include "Doodlebug.hpp"
 #include <cstdlib>
 #include <iostream>
-#include <iomanip>
 
 //Used to initialize board to 20x20 of NULL
 Board::Board()
 {
-	size = 20;
-	board = new Critter**[size];
-	for(int i = 0; i < size; i++)
+	board = new Critter**[20];
+	for (int i = 0; i < 20; i++)
 	{
-		board[i] = new Critter*[size];
-		for (int j = 0; j < size; j++)
+		board[i] = new Critter*[20];
+		for (int j = 0; j < 20; j++)
 		{
 			board[i][j] = NULL;
 		}
@@ -23,9 +21,9 @@ Board::Board()
 //Used to remove any dynamically created objects off the board
 Board::~Board()
 {
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			if (board[i][j] != NULL)
 				delete board[i][j];
@@ -42,13 +40,12 @@ void Board::displayBoard()
 	int doodlebugs = 0;
 
 	std::cout << "\n\n";
-	for (int j = 0; j < size; j++)
+	for (int j = 0; j < 20; j++)
 	{
-		std::cout << "|";
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < 20; i++)
 		{
 			if (board[i][j] == NULL)
-				std::cout << " ";
+				std::cout << "#";
 			else if (board[i][j]->getType() == ANT){
 				ants++;
 				std::cout << "O";
@@ -57,7 +54,6 @@ void Board::displayBoard()
 				doodlebugs++;
 				std::cout << "X";
 			}
-		std::cout << "|";
 		}
 		std::cout << std::endl;
 	}
@@ -75,8 +71,8 @@ void Board::addCritters()
 	int numDoodlebug = 0;
 	while (numAnt < 100)
 	{
-		int x = rand() % size;  //get random x
-		int y = rand() % size;  //get random y
+		int x = rand() % 20;  //get random x
+		int y = rand() % 20;  //get random y
 
 		if (board[x][y] == NULL) //if there is nothing there
 		{ //increase the number of ant counter
@@ -89,8 +85,8 @@ void Board::addCritters()
 	//The Doodlebug creation/addition portion
 	while (numDoodlebug < 5)
 	{
-		int x = rand() % size;  //get random x
-		int y = rand() % size;  //get random y
+		int x = rand() % 20;  //get random x
+		int y = rand() % 20;  //get random y
 
 		if (board[x][y] == NULL) //if there is nothing there
 		{ //increase the number of ant counter
@@ -105,24 +101,26 @@ void Board::moveCritters()
 {
 	//Iterate through grid performing move function on all Critters with moved = false
 	//Move the Doodlebugs first.
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			if(board[i][j] != NULL && board[i][j]->getType() == DOODLEBUG && board[i][j]->getMoved() == false)
 			{
-				board[i][j]->move(&board, size);
+				std::cout << board[i][j]->getXCoord() +1 << std::endl;
+				std::cout << board[i][j]->getYCoord() +1  << std::endl;
+				board[i][j]->move(&board);
 			}
 		}
 	}
 	//Move the Ants last.	
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (int j = 0; j < 20; j++)
 		{
-			if(board[i][j] != NULL && board[i][j]->getType() == ANT && board[i][j]->getMoved() == false)
+			if(board[i][j] != NULL && board[i][j]->getType() == ANT)
 			{
-				board[i][j]->move(&board, size);
+				board[i][j]->move(&board);
 			}
 		}
 	}
@@ -130,18 +128,28 @@ void Board::moveCritters()
 
 void Board::breedCritters()
 {
-	//perform breed function on all Critters
-	for (int i = 0; i < size; i++)
 	{
-		for (int j = 0; j < size; j++)
+		//Iterate through grid performing move function on all Critters with moved = false
+		//Move the Doodlebugs first.
+		for (int i = 0; i < 20; i++)
 		{
-			if(board[i][j] != NULL && board[i][j]->getType() == DOODLEBUG && board[i][j]->getSteps() > 0 && board[i][j]->getSteps() % 8 == 0)
+			for (int j = 0; j < 20; j++)
 			{
-				board[i][j]->breed(&board,size);
+				if (board[i][j] != NULL && board[i][j]->getType() == DOODLEBUG)
+				{
+					board[i][j]->breed(&board);
+				}
 			}
-			if(board[i][j] != NULL && board[i][j]->getType() == ANT && board[i][j]->getSteps() > 0 && board[i][j]->getSteps() % 3 == 0)
+		}
+		//Move the Ants last.	
+		for (int i = 0; i < 20; i++)
+		{
+			for (int j = 0; j < 20; j++)
 			{
-				board[i][j]->breed(&board,size);
+				if (board[i][j] != NULL && board[i][j]->getType() == ANT)
+				{
+					board[i][j]->breed(&board);
+				}
 			}
 		}
 	}
@@ -150,9 +158,9 @@ void Board::breedCritters()
 void Board::clearMoved()
 {
 	//set moved to false on all Critters
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < size; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			if (board[i][j] != NULL)
 			{
@@ -165,8 +173,8 @@ void Board::clearMoved()
 void Board::removeCritters()
 {
 	//remove all Critters with alive = false
-	for(int x = 0; x < size; x++){
-		for(int y = 0; y < size; y++){
+	for(int x = 0; x < 20; x++){
+		for(int y = 0; y < 20; y++){
 			if(board[x][y] != NULL && board[x][y]->getType() == DOODLEBUG){
 				Doodlebug *doodle = dynamic_cast<Doodlebug*>(board[x][y]);
 				if (doodle->getHunger() == 3){
