@@ -15,7 +15,7 @@ public:
 	~Doodlebug();
 
 	virtual void move(Critter****);
-	void breed();
+	void breed(Critter****);
 	void setHunger(int starve);
 	int getHunger();
 };

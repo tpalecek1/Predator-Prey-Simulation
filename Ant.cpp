@@ -85,12 +85,52 @@ void Ant::move(Critter ****board)
 	setSteps(getSteps() + 1);
 }
 
-void Ant::breed()
+
+void Ant::breed(Critter**** board)
 {
-	/*
-	 if Steps >= 3 
-		create new ant in an empty cell adjacent to ant, 
-		set Steps to 0. 
-	If no empty adjacent cell, do nothing.
-	*/
+	if (getSteps() >= 3) {
+
+		int counter = 0;
+		int direction = rand();
+		bool moved = false;
+		direction++;
+		while (counter < 4 && !moved) {
+			direction = direction % 4;
+			switch (direction)
+			{
+			case 0:
+				if (getXCoord() - 1 > -1 && (*board)[getXCoord() - 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() - 1][getYCoord()] = new Ant(getXCoord() - 1, getYCoord());
+					setSteps(0);
+				}
+				counter++;
+				break;
+			case 1:
+				if (getYCoord() + 1 < 20 && (*board)[getXCoord()][getYCoord() + 1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() + 1] = new Ant(getXCoord(), getYCoord() + 1);
+					setSteps(0);
+				}
+				counter++;
+				break;
+			case 2:
+				if (getXCoord() + 1 < 20 && (*board)[getXCoord() + 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() + 1][getYCoord()] = new Ant(getXCoord() + 1, getYCoord());
+					setSteps(0);
+				}
+				counter++;
+				break;
+			case 3:
+				if (getYCoord() - 1 > -1 && (*board)[getXCoord()][getYCoord() - 1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() - 1] = new Ant(getXCoord(), getYCoord() - 1);
+					setSteps(0);
+				}
+				counter++;
+				break;
+			}
+		}
+	}
 }

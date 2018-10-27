@@ -12,7 +12,7 @@ public:
 	~Ant();
 
 	virtual void move(Critter ****board);
-	void breed();
+	void breed(Critter**** board);
 };
 
 #endif

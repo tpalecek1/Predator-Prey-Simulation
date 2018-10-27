@@ -72,7 +72,8 @@ void Critter::move(Critter ****board)
 	//
 }
 
-void Critter::breed()
+
+void Critter::breed(Critter**** board)
 {
 	//
 }
