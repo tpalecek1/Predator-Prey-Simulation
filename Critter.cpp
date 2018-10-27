@@ -72,6 +72,7 @@ void Critter::move(Critter ****board, int boardSize)
 	//
 }
 
+
 void Critter::breed(Critter ****board, int boardSize)
 {
 	//

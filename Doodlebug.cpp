@@ -184,6 +184,8 @@ void Doodlebug::move(Critter ****board, int boardSize)
 	
 	setMoved(true);
 	setSteps(getSteps() + 1);
+	setHunger(getHunger() +1);
+	std::cout << "The doodlebug is " << getHunger() << " that hungry." << std::endl;
 }
 
 

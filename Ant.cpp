@@ -92,6 +92,7 @@ void Ant::move(Critter ****board, int boardSize)
 	setSteps(getSteps() + 1);
 }
 
+
 void Ant::breed(Critter**** board, int boardSize)
 {
 	/*
