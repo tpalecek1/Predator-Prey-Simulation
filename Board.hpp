@@ -6,6 +6,7 @@ class Board
 {
 private:
 	Critter*** board;
+	int size;
 public:
 	Board();
 	~Board();
