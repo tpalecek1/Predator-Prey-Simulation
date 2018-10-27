@@ -11,8 +11,8 @@ public:
 	Ant(int x, int y);
 	~Ant();
 
-	virtual void move(Critter ****board);
-	void breed();
+	virtual void move(Critter ****,int);
+	virtual void breed(Critter ****,int);
 };
 
 #endif

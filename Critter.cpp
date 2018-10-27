@@ -67,12 +67,12 @@ Type Critter::getType()
 	return type;
 }
 
-void Critter::move(Critter ****board)
+void Critter::move(Critter ****board, int boardSize)
 {
 	//
 }
 
-void Critter::breed()
+void Critter::breed(Critter ****board, int boardSize)
 {
 	//
 }
