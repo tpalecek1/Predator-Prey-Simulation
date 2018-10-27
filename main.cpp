@@ -24,7 +24,6 @@ int main(int argc, char const *argv[])
 	board.addCritters();
 	board.displayBoard();
 	while (cont == 1) {
-
 		for (int n = 0; n < rounds; n++) {
 			board.moveCritters();
 			board.breedCritters();

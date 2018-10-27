@@ -34,9 +34,9 @@ public:
 	Type getType();
 
 	//Function that moves to an adjacent position and increases step count by 1
-	virtual void move(Critter****);
+	virtual void move(Critter****, int);
 	//Function that attempts to create critter in adjacent empty cell. If successful, set steps to 0
-	virtual void breed(Critter****);
+	virtual void breed(Critter****, int);
 };
 
 #endif
