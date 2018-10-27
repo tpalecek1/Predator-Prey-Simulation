@@ -184,7 +184,6 @@ void Doodlebug::move(Critter ****board, int boardSize)
 	
 	setMoved(true);
 	setSteps(getSteps() + 1);
-	setHunger(getHunger() +1);
 }
 
 
