@@ -91,15 +91,54 @@ void Doodlebug::move(Critter ****board)
 }
 
 
-void Doodlebug::breed()
+
+void Doodlebug::breed(Critter**** board)
 {
-	/*
-	If Steps >= 8 
-		create new Doodlebug in an empty cell adjacent to Doodlebug, 
-		set Steps to 0. 
-	If no empty adjacent cell, 
-		do nothing.
-	*/
+	if (getSteps() >= 3) {
+
+		int counter = 0;
+		int direction = rand();
+		bool moved = false;
+		direction++;
+		while (counter < 4 && !moved) {
+			direction = direction % 4;
+			switch (direction)
+			{
+			case 0:
+				if (getXCoord() - 1 > -1 && (*board)[getXCoord() - 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() - 1][getYCoord()] = new Doodlebug(getXCoord() - 1, getYCoord());
+					setSteps(0);
+				}
+				counter++;
+				break;
+			case 1:
+				if (getYCoord() + 1 < 20 && (*board)[getXCoord()][getYCoord() + 1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() + 1] = new Doodlebug(getXCoord(), getYCoord() + 1);
+					setSteps(0);
+				}
+				counter++;
+				break;
+			case 2:
+				if (getXCoord() + 1 < 20 && (*board)[getXCoord() + 1][getYCoord()] == NULL)
+				{
+					(*board)[getXCoord() + 1][getYCoord()] = new Doodlebug(getXCoord() + 1, getYCoord());
+					setSteps(0);
+				}
+				counter++;
+				break;
+			case 3:
+				if (getYCoord() - 1 > -1 && (*board)[getXCoord()][getYCoord() - 1] == NULL)
+				{
+					(*board)[getXCoord()][getYCoord() - 1] = new Doodlebug(getXCoord(), getYCoord() - 1);
+					setSteps(0);
+				}
+				counter++;
+				break;
+			}
+		}
+	}
 }
 
 int Doodlebug::getHunger()

@@ -128,7 +128,31 @@ void Board::moveCritters()
 
 void Board::breedCritters()
 {
-	//perform breed function on all Critters
+	{
+		//Iterate through grid performing move function on all Critters with moved = false
+		//Move the Doodlebugs first.
+		for (int i = 0; i < 20; i++)
+		{
+			for (int j = 0; j < 20; j++)
+			{
+				if (board[i][j] != NULL && board[i][j]->getType() == DOODLEBUG)
+				{
+					board[i][j]->breed(&board);
+				}
+			}
+		}
+		//Move the Ants last.	
+		for (int i = 0; i < 20; i++)
+		{
+			for (int j = 0; j < 20; j++)
+			{
+				if (board[i][j] != NULL && board[i][j]->getType() == ANT)
+				{
+					board[i][j]->breed(&board);
+				}
+			}
+		}
+	}
 }
 
 void Board::clearMoved()

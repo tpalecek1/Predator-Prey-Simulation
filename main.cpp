@@ -10,8 +10,9 @@ int main(int argc, char const *argv[])
 	board.displayBoard();
 	board.addCritters();
 	board.displayBoard();
-	for(int n = 0; n < 3; n++){
+	for(int n = 0; n < 50; n++){
 		board.moveCritters();
+		board.breedCritters();
 		board.clearMoved();
 		board.removeCritters();
 		board.displayBoard();

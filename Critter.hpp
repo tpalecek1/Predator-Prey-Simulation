@@ -36,7 +36,7 @@ public:
 	//Function that moves to an adjacent position and increases step count by 1
 	virtual void move(Critter****);
 	//Function that attempts to create critter in adjacent empty cell. If successful, set steps to 0
-	virtual void breed();
+	virtual void breed(Critter****);
 };
 
 #endif
