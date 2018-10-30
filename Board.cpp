@@ -169,7 +169,7 @@ void Board::removeCritters()
 		for(int y = 0; y < size; y++){
 			if(board[x][y] != NULL && board[x][y]->getType() == DOODLEBUG){
 				Doodlebug *doodle = dynamic_cast<Doodlebug*>(board[x][y]);
-				if (doodle->getHunger() == 3){
+				if (doodle->starve()){
 					delete board[x][y];
 					board[x][y] = NULL;
 				}

@@ -77,3 +77,9 @@ void Critter::breed(Critter ****board, int boardSize)
 {
 	//
 }
+
+
+bool Critter::starve()
+{
+	return false;
+}

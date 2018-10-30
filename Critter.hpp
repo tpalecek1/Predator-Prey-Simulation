@@ -37,6 +37,7 @@ public:
 	virtual void move(Critter****, int);
 	//Function that attempts to create critter in adjacent empty cell. If successful, set steps to 0
 	virtual void breed(Critter****, int);
+	virtual bool starve();
 };
 
 #endif

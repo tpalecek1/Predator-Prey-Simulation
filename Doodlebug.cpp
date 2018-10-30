@@ -243,3 +243,15 @@ void Doodlebug::setHunger(int starve)
 {
 	hunger = starve;
 }
+
+bool Doodlebug::starve()
+{
+	if (hunger > 3)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
