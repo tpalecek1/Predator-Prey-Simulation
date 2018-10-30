@@ -18,6 +18,7 @@ public:
 	virtual void breed(Critter****,int);
 	void setHunger(int starve);
 	int getHunger();
+	bool starve();
 };
 
 #endif
