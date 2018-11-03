@@ -1,3 +1,10 @@
+/*********************************************************************
+** Program name:    Predator-Prey Game
+** Author:          Timothym P, Johnny B, Jose G, Melisa L, Randoplph T
+** Date:            11/3/2018
+** Description:     Board.cpp is the Board class implementation file.
+*********************************************************************/
+
 #include "Board.hpp"
 #include "Critter.hpp"
 #include "Ant.hpp"
@@ -6,7 +13,10 @@
 #include <iostream>
 #include <iomanip>
 
-//Used to initialize board to 20x20 of NULL
+/********************************************************************
+** Description: This default constructor initialize board to 20x20 
+				to NULL.
+********************************************************************/
 Board::Board()
 {
 	size = 20;
@@ -20,28 +30,18 @@ Board::Board()
 		}
 	}
 }
-//Used to remove any dynamically created objects off the board
-Board::~Board()
-{
-	for (int i = 0; i < size; i++)
-	{
-		for (int j = 0; j < size; j++)
-		{
-			if (board[i][j] != NULL)
-				delete board[i][j];
-		}
-		delete [] board[i];
-	}
-	delete[] board;
-}
-//Used to iterate through the board and display a blank, 'O', or 'X' based on what
-//what is located there
+
+/********************************************************************
+** Description: This function accepts no parameter and display the 
+				board to the user.
+********************************************************************/
 void Board::displayBoard()
 {
 	int ants = 0;
 	int doodlebugs = 0;
 
 	std::cout << "\n\n";
+	//iterate through board displaying either 'X' or 'O'
 	for (int j = 0; j < size; j++)
 	{
 		std::cout << "|";
@@ -63,11 +63,14 @@ void Board::displayBoard()
 	}
 	std::cout << "There are " << ants << " ants." << std::endl;
 	std::cout << "There are " << doodlebugs << " doodlebugs." << std::endl;
-
-
 }
-//Used to add Critter Pointers to 100 Ant
-//and 5 Doodlebug objects randomly on the board
+
+
+/********************************************************************
+** Description: This function accepts no parameter and add Critter ptr
+				to 100 Ants and 5 Doodlebug objects randomly on the
+				board.
+********************************************************************/
 void Board::addCritters()
 {
 	//The Ant creation/addition portion
@@ -101,6 +104,10 @@ void Board::addCritters()
 	}
 }
 
+/********************************************************************
+** Description: This function accepts no parameter. Move Doodlebug
+				first than Ant.
+********************************************************************/
 void Board::moveCritters()
 {
 	//Iterate through grid performing move function on all Critters with moved = false
@@ -128,6 +135,10 @@ void Board::moveCritters()
 	}
 }
 
+/********************************************************************
+** Description: This function accepts no parameter. Peforms breed
+				function on all Critters.
+********************************************************************/
 void Board::breedCritters()
 {
 	//perform breed function on all Critters
@@ -147,6 +158,10 @@ void Board::breedCritters()
 	}
 }
 
+/********************************************************************
+** Description: This function accepts no parameter. Clears the move
+				flag for all Critters.
+********************************************************************/
 void Board::clearMoved()
 {
 	//set moved to false on all Critters
@@ -162,6 +177,10 @@ void Board::clearMoved()
 	}
 }
 
+/********************************************************************
+** Description: This function accepts no parameter. Removes all 
+				critter by setting the flag of alive to false.
+********************************************************************/
 void Board::removeCritters()
 {
 	//remove all Critters with alive = false
@@ -176,4 +195,22 @@ void Board::removeCritters()
 			}
 		}
 	}
+}
+
+/********************************************************************
+** Description: This destructor free's up dynamically allocated
+				memory.
+********************************************************************/
+Board::~Board()
+{
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (board[i][j] != NULL)
+				delete board[i][j];
+		}
+		delete [] board[i];
+	}
+	delete[] board;
 }

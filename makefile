@@ -1,3 +1,8 @@
+# Program Name: Predator-Prey Game
+# Author:		Timothym P, Johnny B, Jose G, Melisa L, Randoplph T
+# Date:			11/3/2018
+# Description:	Makefile for group project
+
 CXX = g++
 CXXFLAGS = -g
 CXXFLAGS += -Wall

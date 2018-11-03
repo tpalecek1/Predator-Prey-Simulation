@@ -1,49 +1,73 @@
 /*********************************************************************
-** Program name: OSU Information System
-** Author: Timothy Palecek
-** Date: 10/19/2018
-** Description: Implementation file for the Menu class.  Has integers to store number of
-**				instructions and number of menu options, vecotrs to store
-**				instructions and options. Has functions to add
-**				instructions and options, to display the menu and return
-**				validated user input as an int.
+** Program name:    Predator-Prey Game
+** Author:          Timothym P, Johnny B, Jose G, Melisa L, Randoplph T
+** Date:            11/3/2018
+** Description:     Implementation file for the Menu class.  Has integers
+					to store number of instructions and number of menu 
+					options, vecotrs to store instructions and options. 
+					Has functions to add instructions and options, to
+					display the menu and return validated user input 
+					as an int.
 *********************************************************************/
-
 #include "Menu.hpp"
 
+/********************************************************************
+** Description: Default constructor set private member variable
+				numInstructions and numOptions to 0.
+********************************************************************/
 Menu::Menu()
 {
 	numInstructions = 0;
 	numOptions = 0;
 }
 
-
+/********************************************************************
+** Description: Destructor.
+********************************************************************/
 Menu::~Menu()
 {
 }
-//Return number of instructions
+
+/********************************************************************
+** Description: This function accepts no parameter and returns
+				the number of instructions.
+********************************************************************/
 int Menu::getNumInstructions()
 {
 	return numInstructions;
 }
-//Return number of options
+
+/********************************************************************
+** Description: This function accepts no parameter and returns
+				the number of options.
+********************************************************************/
 int Menu::getNumOptions()
 {
 	return numOptions;
 }
-//Add an instruction to vector of strings
+
+/********************************************************************
+** Description: This function add an instruction to vector of strings.
+********************************************************************/
 void Menu::addInstructions(std::string instr)
 {
 	instructions.push_back(instr);
 	numInstructions++;
 }
-//Add option to vector of strings
+
+/********************************************************************
+** Description: This function add option to vector of strings
+********************************************************************/
 void Menu::addOption(std::string op)
 {
 	options.push_back(op);
 	numOptions++;
 }
-//Display the instructions and a numbered list of options
+
+/********************************************************************
+** Description: This function accepts no parameter and display
+				the instruction and menu to the user.
+********************************************************************/
 void Menu::display()
 {
 	std::cout << "\n**********************************************" << std::endl;
@@ -55,7 +79,11 @@ void Menu::display()
 		std::cout << i + 1 << ". " << options[i] << std::endl;
 	}
 }
-//Return user input between 1 and number of options
+
+/********************************************************************
+** Description: This function accepts no parameter and returns
+				user input between 1 and number of options.
+********************************************************************/
 int Menu::getInput()
 {
 	std::string strInput = " ";
@@ -92,7 +120,12 @@ int Menu::getInput()
 
 	return std::stoi(strInput);
 }
-//Displays the menu AND gets input
+
+
+/********************************************************************
+** Description: This function accepts no parameter and displays the
+				menu to the user and retuns the user input.
+********************************************************************/
 int Menu::prompt()
 {
 	display();
