@@ -1,11 +1,11 @@
 /*********************************************************************
-** Program name: Langton's Ant
-** Author: Timothy Palecek
-** Date: 10/3/2018
-** Description: This file stores validation functions that ensures inputs are of the desired
-**				type and within the desired range, and returns these values.
+** Program name:    Predator-Prey Game
+** Author:          Timothym P, Johnny B, Jose G, Melisa L, Randoplph T
+** Date:            11/3/2018
+** Description:    	This file stores validation functions that ensures
+                    inputs are of the desired type and within the desired
+                     range, and returns these values.
 *********************************************************************/
-
 
 #ifndef VALIDATION_HPP
 #define VALIDATION_HPP
@@ -19,5 +19,5 @@ std::string alphaNumValidation(std::string message);
 int validation(int input, int lowerBound, int upperBound, std::string message);
 
 double doubleValidation(double lowerbound, double upperbound, std::string message);
-#endif
 
+#endif

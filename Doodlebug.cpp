@@ -1,13 +1,27 @@
+/*********************************************************************
+** Program name:    Predator-Prey Game
+** Author:          Timothym P, Johnny B, Jose G, Melisa L, Randoplph T
+** Date:            11/3/2018
+** Description:     Doodlebug.cpp is the Doodlebug implementation file.
+*********************************************************************/
+
 #include "Doodlebug.hpp"
 #include <cstdlib>
 #include <iostream>
 
-
-
+/********************************************************************
+** Description: Default constructor.
+********************************************************************/
 Doodlebug::Doodlebug()
 {
 }
 
+/********************************************************************
+** Description: This constructor accepts two integers: x and y. Set 
+				the member variables: steps to 0, move to false, 
+				xCoord to x, yCoord to y, hunger to 0 and type to 
+				Doodlebug.
+********************************************************************/
 Doodlebug::Doodlebug(int x, int y)
 {
 	xCoord = x;
@@ -18,11 +32,13 @@ Doodlebug::Doodlebug(int x, int y)
 	setMoved(false);
 }
 
-
-Doodlebug::~Doodlebug()
-{
-}
-
+/********************************************************************
+** Description: This function accpets Critter board and the board 
+				size as the parameter. Each step Doodlebug will try 
+				to move to an adjacent cell containing an ant and eat 
+				the ant. If not the Doodle will move to a random 
+				adjacent cell.
+********************************************************************/
 void Doodlebug::move(Critter ****board, int boardSize)
 {
 	/*
@@ -186,9 +202,22 @@ void Doodlebug::move(Critter ****board, int boardSize)
 	setSteps(getSteps() + 1);
 }
 
-
+/********************************************************************
+** Description: This function takes in two parameters: Critter board
+				and the size of the board. If a ant survives for >=8
+				steps. Breed a new Doodlebug to a random adjacent cell. 
+				If no empty cells are avaiable no breeding occurs.
+********************************************************************/
 void Doodlebug::breed(Critter**** board, int boardSize)
 {
+	int direction;
+	
+	bool up = getXCoord() - 1 > -1 && (*board)[getXCoord() -1][getYCoord()] == NULL;
+	bool down = getXCoord() + 1 < boardSize && (*board)[getXCoord() + 1][getYCoord()] == NULL;
+	bool left = getYCoord() + 1 < boardSize && (*board)[getXCoord()][getYCoord() + 1] == NULL;
+	bool right = getYCoord() - 1 > -1 && (*board)[getXCoord()][getYCoord() - 1] == NULL;
+	bool notBred = true;
+
 	/*
 	If Steps >= 8 
 		create new Doodlebug in an empty cell adjacent to Doodlebug, 
@@ -196,13 +225,6 @@ void Doodlebug::breed(Critter**** board, int boardSize)
 	If no empty adjacent cell, 
 		do nothing.
 	*/
-
-	int direction;
-	bool up = getXCoord() - 1 > -1 && (*board)[getXCoord() -1][getYCoord()] == NULL;
-	bool down = getXCoord() + 1 < boardSize && (*board)[getXCoord() + 1][getYCoord()] == NULL;
-	bool left = getYCoord() + 1 < boardSize && (*board)[getXCoord()][getYCoord() + 1] == NULL;
-	bool right = getYCoord() - 1 > -1 && (*board)[getXCoord()][getYCoord() - 1] == NULL;
-	bool notBred = true;
 	while((up || down || left || right) && notBred){
 		direction = rand() % 4;
 		switch(direction){
@@ -234,16 +256,28 @@ void Doodlebug::breed(Critter**** board, int boardSize)
 	}
 }
 
-int Doodlebug::getHunger()
-{
-	return hunger;
-}
-
+/********************************************************************
+** Description: This function accepts an integer starve and set
+				the member variable hunger.
+********************************************************************/
 void Doodlebug::setHunger(int starve)
 {
 	hunger = starve;
 }
 
+/********************************************************************
+** Description: This function accepts no parameter and return the
+				integer hunger.
+********************************************************************/
+int Doodlebug::getHunger()
+{
+	return hunger;
+}
+
+/********************************************************************
+** Description: This function accepts no parameter. Returns true
+				if hunger is greater than 3 if not return false.
+********************************************************************/
 bool Doodlebug::starve()
 {
 	if (hunger > 3)
@@ -254,4 +288,11 @@ bool Doodlebug::starve()
 	{
 		return false;
 	}
+}
+
+/********************************************************************
+** Description: Destructor
+********************************************************************/
+Doodlebug::~Doodlebug()
+{
 }

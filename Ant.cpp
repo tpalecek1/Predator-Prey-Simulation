@@ -1,12 +1,25 @@
+/*********************************************************************
+** Program name:    Predator-Prey Game
+** Author:          Timothym P, Johnny B, Jose G, Melisa L, Randoplph T
+** Date:            11/3/2018
+** Description:     Ant.cpp is the Ant class implementation file.
+*********************************************************************/
 #include "Ant.hpp"
 #include <cstdlib>
 #include <iostream>
 
-
+/********************************************************************
+** Description: Default constructor.
+********************************************************************/
 Ant::Ant()
 {
 }
 
+/********************************************************************
+** Description: This constructor accepts two integers: x and y. Set 
+				the member variables: steps to 0, move to false, 
+				xCoord to x, yCoord to y and type to ANT.
+********************************************************************/
 Ant::Ant(int x, int y)
 {
 	setSteps(0);
@@ -14,19 +27,19 @@ Ant::Ant(int x, int y)
 	xCoord = x;
 	yCoord = y;
 	type = ANT;
-
 }
 
 
-Ant::~Ant()
-{
-}
-
+/********************************************************************
+** Description: This function accpets Critter board and the board 
+				size as the parameter. Move ant to a random adjacent
+				cell, if none are occupied don't move.
+********************************************************************/
 void Ant::move(Critter ****board, int boardSize)
 {
 	/*
 	Increase step count by 1
-	randomly move up, down, left, or right. If cell is occupied or off the grid, don’t move.  
+	randomly move up, down, left, or right. If cell is occupied or off the grid, don't move.  
 	*/
 	int direction = rand(); 
 	bool critterMoved = false;
@@ -84,15 +97,19 @@ void Ant::move(Critter ****board, int boardSize)
 					critterMoved = true;
 				}
 				break;
-
-
 		}
 	}
+
 	setMoved(true);
 	setSteps(getSteps() + 1);
 }
 
-
+/********************************************************************
+** Description: This function takes in two parameters: Critter board
+				and the size of the board. If a ant survives for three
+				steps breed a new ant to a random adjacent cell. If no
+				empty cells are avaiable no breeding occurs.
+********************************************************************/
 void Ant::breed(Critter**** board, int boardSize)
 {
 	/*
@@ -143,4 +160,11 @@ void Ant::breed(Critter**** board, int boardSize)
 				break;	
 		}
 	}
+}
+
+/********************************************************************
+** Description: Destructor
+********************************************************************/
+Ant::~Ant()
+{
 }
